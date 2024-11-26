@@ -5,10 +5,10 @@ import glob
 from os import listdir,makedirs
 from os.path import isfile,join
 
-input_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Foto Terpisah\David'
-output_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Grey_Photo\David'
+input_folder = r'C:\Users\putin\Face-Recognition-NN\Dataset\Grey_Photo'
+output_folder = r'C:\Users\putin\Face-Recognition-NN\Dataset\Resized_Photo'
 
-for i in range(12): 
+for i in range(14): 
     # Pastikan output_folder ada
     os.makedirs(output_folder, exist_ok=True)
 
