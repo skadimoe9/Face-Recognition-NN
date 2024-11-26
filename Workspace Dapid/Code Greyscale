@@ -1,0 +1,63 @@
+import os
+import cv2
+import numpy as np
+import glob
+from os import listdir,makedirs
+from os.path import isfile,join
+
+input_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Foto Terpisah\David'
+output_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Grey_Photo\David'
+
+for i in range(12): 
+    # Pastikan output_folder ada
+    os.makedirs(output_folder, exist_ok=True)
+
+    # Menelusuri semua folder dan subfolder
+    for root, dirs, files in os.walk(input_folder):
+        for file in files:
+            if file.lower().endswith(('.jpg', '.jpeg', '.png')):
+                try:
+                    img_path = os.path.join(root, file)
+                    img = cv2.imread(img_path)  # Menggunakan img_path untuk membaca gambar
+                    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+                    relative_path = os.path.relpath(root, input_folder)
+                    output_subfolder = os.path.join(output_folder, relative_path)
+                    os.makedirs(output_subfolder,exist_ok = True)
+                    # Menentukan path output
+                    output_file_path = os.path.join(output_folder, file)
+                    cv2.imwrite(output_file_path, gray)
+                    print(f"{file} berhasil dikonversi dan disimpan di {output_file_path}")
+                except Exception as e:
+                    print(f"{file} tidak dapat dikonversi. Error : {e}")
+    print(i)
+    if i == 1:
+        input_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Foto Terpisah\Dimas'
+        output_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Grey_Photo\Dimas'
+    elif i == 2:
+        input_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Foto Terpisah\Fadhli'
+        output_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Grey_Photo\Fadhli'
+    elif i == 3:
+        input_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Foto Terpisah\Fadlin'
+        output_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Grey_Photo\Fadlin'
+    elif i == 4:
+        input_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Foto Terpisah\Hafidz'
+        output_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Grey_Photo\Hafidz'
+    elif i == 5:
+        input_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Foto Terpisah\Haidar'
+        output_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Grey_Photo\Haidar'
+    elif i == 6:
+        input_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Foto Terpisah\Keiko'
+        output_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Grey_Photo\Keiko'
+    elif i == 7:
+        input_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Foto Terpisah\Khansa'
+        output_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Grey_Photo\Khansa'
+    elif i == 8:
+        input_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Foto Terpisah\Mikhael'
+        output_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Grey_Photo\Mikhael'
+    elif i == 9:
+        input_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Foto Terpisah\Raesa'
+        output_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Grey_Photo\Raesa'
+    elif i == 10:
+        input_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Foto Terpisah\Toni'
+        output_folder = r'C:\Users\david\OneDrive\Dokumen\1. Folder Pribadi\Kuliah\Semester 5\PENGMOD\Pengmod\Face-Recognition-NN\Dataset\Grey_Photo\Toni'
