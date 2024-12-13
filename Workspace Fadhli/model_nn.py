@@ -214,6 +214,11 @@ class FaceRecognitionModel:
     def predict(self, X):
         return self.forward_propagation(X)
     
+    def predict_label(self, X): 
+        y_pred = self.predict(X)
+        predicted_labels = np.argmax(y_pred, axis=1)
+        return [self.labels[label] for label in predicted_labels]
+    
     def test(self, X_test, y_test):
         y_pred = self.predict(X_test)
         loss = self.cross_entropy_loss(y_test, y_pred)
