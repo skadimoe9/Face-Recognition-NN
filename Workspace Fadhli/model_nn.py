@@ -217,7 +217,7 @@ class FaceRecognitionModel:
     def test(self, X_test, y_test):
         y_pred = self.predict(X_test)
         loss = self.cross_entropy_loss(y_test, y_pred)
-        print(f'Test Loss: {loss}')
+        print(f'Test Error : {loss}')
         return y_pred
 
     def plot_training_error(self, train_losses, val_losses=None):
