@@ -1,0 +1,19 @@
+// Rotate Version 50x50
+
+- Gradient Descent
+Yi Sang [10000 epochs, 1e-2 learning rate, 64 hidden_layer_sizes]
+Faust [10000 epochs, 1e-3 learning rate, 64 hidden_layer_sizes]
+Don Quixote [15000 epochs, 1e-3 learning rate, 64 hidden_layer_sizes]
+Ryoshu [20000 epochs, 1e-3 learning rate, 64 hidden_layer_sizes]
+Meursault [20000 epochs, 1e-3 learning rate, 32 hidden_layer_sizes]
+Hong Lu [20000 epochs, 1e-3 learning rate, 128 hidden_layer_sizes]
+
+- Adam Optimizer 
+3 pake adam 
+
+// Without Rotate Version 50x50
+- Gradient 
+2
+
+- Adam 
+1
