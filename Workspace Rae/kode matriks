@@ -69,10 +69,10 @@ def split_data(X, Y, train_ratio, val_ratio):
 
   # Kembalikan X Y untuk training, validasi, dan testing
   return X_train, Y_train, X_val, Y_val, X_test, Y_test
+  
+X_train, Y_train, X_val, Y_val, X_test, Y_test = split_data(X, Y, train_ratio=0.7, val_ratio=0.15)
 
- X_train, Y_train, X_val, Y_val, X_test, Y_test = split_data(X, Y, train_ratio=0.7, val_ratio=0.15)
-
- def ReLU(x):
+def ReLU(x):
     return np.maximum(0, x)
     
 def Softmax(x):
