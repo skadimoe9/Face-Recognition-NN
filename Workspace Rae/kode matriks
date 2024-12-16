@@ -1,0 +1,145 @@
+import os
+import numpy as np
+from PIL import Image
+import numpy as np
+import math
+from numpy.random import normal
+
+input_directory = "../Dataset/Foto_Resize_70x70"
+
+# List all folders in the input directory
+folders = [f for f in os.listdir(input_directory) if os.path.isdir(os.path.join(input_directory, f))]
+print(f"Found folders: {folders}")
+
+# Initialize arrays for inputs and outputs
+X = []
+Y = []
+
+# Create a mapping from folder names to one-hot encoded labels
+label_map = {folder: idx for idx, folder in enumerate(folders)}
+num_classes = len(folders)
+
+# Process each folder and photo
+for folder in folders:
+    folder_path = os.path.join(input_directory, folder)
+    
+    # Sort the list of photos to ensure consistent order
+    photos = sorted([p for p in os.listdir(folder_path) if p.endswith(('.png', '.jpg', '.jpeg'))])
+    
+    for photo in photos:
+        photo_path = os.path.join(folder_path, photo)
+        image = Image.open(photo_path)
+        
+        # Convert the image to a numpy array and flatten it
+        image_array = np.array(image).flatten()
+        X.append(image_array)
+        
+        # Create a one-hot encoded label
+        label = np.zeros(num_classes)
+        label[label_map[folder]] = 1
+        Y.append(label)
+
+# Convert lists to numpy arrays
+X = np.array(X)
+X = X/255;
+Y = np.array(Y)
+
+print(f"Input array shape: {X.shape}")
+print(f"Output array shape: {Y.shape}")
+
+import numpy as np
+
+def split_data(X, Y, train_ratio, val_ratio):
+  # Acak data
+  num_samples = X.shape[0]  # Assume X and Y have the same number of samples
+  indices = np.arange(num_samples)
+  np.random.shuffle(indices)
+
+  # Cari banyak data atau indeks yang akan digunakan untuk training dan validasi
+  train_idx = int(train_ratio * num_samples)
+  val_idx = int((train_ratio + val_ratio) * num_samples)
+
+  # Split data
+  X_train = X[indices[:train_idx]]
+  Y_train = Y[indices[:train_idx]]
+  X_val = X[indices[train_idx:val_idx]]
+  Y_val = Y[indices[train_idx:val_idx]]
+  X_test = X[indices[val_idx:]]
+  Y_test = Y[indices[val_idx:]]
+
+  # Kembalikan X Y untuk training, validasi, dan testing
+  return X_train, Y_train, X_val, Y_val, X_test, Y_test
+
+ X_train, Y_train, X_val, Y_val, X_test, Y_test = split_data(X, Y, train_ratio=0.7, val_ratio=0.15)
+
+ def ReLU(x):
+    return np.maximum(0, x)
+    
+def Softmax(x):
+    exp_x = np.exp(x - np.max(x, axis=0, keepdims=True))
+    return exp_x / np.sum(exp_x, axis=0, keepdims=True)
+
+def d_ReLU(x):
+    return (x > 0).astype(float)
+
+v = np.random.normal(loc=0, scale = stddev, size = (inputLayer, hiddenNeurons))
+v = v.T
+print(np.shape(v))
+vb = np.random.normal(loc=0, scale=stddev, size=hiddenNeurons) 
+vb = vb.reshape(15,1)
+print(np.shape(vb))
+w = np.random.normal(loc=0, scale = stddev, size = (outputLayer, hiddenNeurons))
+w = w.T
+print(np.shape(w))
+wb = np.random.normal(loc=0, scale = stddev, size = outputLayer)
+wb = wb.reshape(15,1)
+print(np.shape(wb))
+
+
+inputLayer = 4900
+hiddenLayer = 1
+outputLayer = 15
+
+X = X_train.T
+Y = Y_train.T
+
+#70x70
+#input = 4900, hiddenLayer = 1, neuron = 2
+
+n = 15
+stddev = np.sqrt(2/n)
+hiddenNeurons = 15
+
+
+for i in range(10000):
+
+    z_in = np.dot(v,X) + vb
+    z = ReLU(z_in)
+
+    y_in = np.dot(w,z) + wb
+    y = Softmax(y_in)
+
+    sigma_k = y-Y
+
+    delta_w = (1/X.shape[1])*np.dot(sigma_k,z.T)
+    delta_wb = (1/X.shape[1])*np.sum(sigma_k)
+
+    sigma_in = np.dot(w.T,sigma_k)*d_ReLU(z_in)
+
+    delta_v = (1/X.shape[1])*np.dot(sigma_in,X.T)
+    delta_vb = (1/X.shape[1])*np.sum(sigma_in)
+
+    alpha = 2
+    w -= alpha*delta_w
+    wb -= alpha*delta_wb
+    v -= alpha*delta_v
+    vb -= alpha*delta_vb
+
+    def cross_entropy_loss(y_true, y_pred):
+        # Clip predictions to prevent log(0)
+        y_pred = np.clip(y_pred, 1e-15, 1 - 1e-15)
+        # Calculate cross-entropy loss
+        loss = -np.sum(y_true * np.log(y)) / y_true.shape[0]
+        return loss
+    loss = cross_entropy_loss(Y, y)
+    print("Cross-Entropy Loss ",i, ":", loss)
