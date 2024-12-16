@@ -5,6 +5,7 @@ import numpy as np
 import math
 from numpy.random import normal
 
+
 input_directory = "../Dataset/Foto_Resize_70x70"
 
 # List all folders in the input directory
