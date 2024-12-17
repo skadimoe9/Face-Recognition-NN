@@ -8,12 +8,8 @@ Ryoshu [20000 epochs, 1e-3 learning rate, 64 hidden_layer_sizes]
 Meursault [20000 epochs, 1e-3 learning rate, 32 hidden_layer_sizes]
 Hong Lu [20000 epochs, 1e-3 learning rate, 128 hidden_layer_sizes]
 
-- Adam Optimizer 
-3 pake adam 
+// 30x30 Rotate
+Heathcliff [20000 epochs, 1e-3 learning rate, 64 hidden_layer_sizes]
 
-// Without Rotate Version 50x50
-- Gradient 
-2
-
-- Adam 
-1
+// 70x70 Rotate
+Ishmael [20000 epochs, 1e-3 learning rate, 64 hidden_layer_sizes]
